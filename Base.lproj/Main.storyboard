@@ -4,30 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--Campanha-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController id="vXZ-lx-hvc" customClass="CreateCampaignViewController" customModule="CrowdVoucher" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Campanha" id="do4-tb-cQP">
-                        <barButtonItem key="backBarButtonItem" title="Cancelar" id="pFf-IZ-17m"/>
-                    </navigationItem>
-                    <connections>
-                        <segue destination="q9h-Y2-C4U" kind="presentation" id="lMI-rs-NjJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="419" y="335"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="iWf-Um-6fQ">
             <objects>
@@ -38,46 +14,131 @@
                         <color key="barTintColor" red="0.76470588240000004" green="0.098039215690000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="NDN-CK-aYL"/>
+                        <segue destination="eQ6-F6-ufy" kind="relationship" relationship="rootViewController" id="l2X-J7-Hwi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HfP-1Z-KGI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-162.5" y="334.5"/>
+            <point key="canvasLocation" x="-222.5" y="334.5"/>
         </scene>
-        <!--Root View Controller-->
-        <scene sceneID="ClD-cK-Prv">
+        <!--Main View Controller-->
+        <scene sceneID="pfj-pZ-uxa">
             <objects>
-                <tableViewController id="ZaM-ve-Rkg" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jav-en-xUm">
+                <viewController id="JIU-aA-KWt" customClass="MainViewController" customModule="CrowdVoucher" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uUF-hK-q23"/>
+                        <viewControllerLayoutGuide type="bottom" id="C15-EH-7sL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xut-6r-2IS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5el-8a-asV">
+                                <rect key="frame" x="79" y="577" width="217" height="44"/>
+                                <color key="backgroundColor" red="0.76470588240000004" green="0.098039215690000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Criar">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fVw-Ok-CMZ"/>
+                    <connections>
+                        <segue destination="dD8-fe-El3" kind="presentation" id="aCI-Tg-gZX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rfp-Ov-O0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-829.5" y="333.5"/>
+        </scene>
+        <!--Campanha-->
+        <scene sceneID="fAO-Bk-Ov6">
+            <objects>
+                <tableViewController id="eQ6-F6-ufy" customClass="CreateCampaignViewController" customModule="CrowdVoucher" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QVU-vs-8tX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="Jk0-nL-M8O">
+                            <rect key="frame" x="0.0" y="64" width="375" height="244"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="U9b-ez-kG0">
+                                    <rect key="frame" x="62" y="208" width="250" height="29"/>
+                                    <segments>
+                                        <segment title="5 dias"/>
+                                        <segment title="10 dias"/>
+                                        <segment title="15 dias"/>
+                                    </segments>
+                                    <color key="tintColor" red="0.76470588240000004" green="0.098039215690000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </segmentedControl>
+                            </subviews>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="vkf-fb-0A3">
+                            <rect key="frame" x="0.0" y="617" width="375" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PUBLICAR" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Wi-wO-qkC">
+                                    <rect key="frame" x="141" y="14" width="92" height="21"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.14117647059999999" green="0.60784313729999995" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
                         <sections>
-                            <tableViewSection id="bp5-5L-8pl">
+                            <tableViewSection id="bO2-9b-Aaz">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pJg-mg-oyx">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pD0-el-gYG">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pJg-mg-oyx" id="XGF-D6-AmU">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pD0-el-gYG" id="nre-NU-JQU">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Título da campanha" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7N-vE-WsR">
+                                                    <rect key="frame" x="10" y="3" width="300" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="255" id="RmX-UG-EXU">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RmX-UG-EXU" id="6Sr-tn-4bC">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Diga o porquê você precisa da contribuição de seus amigos" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cv4-BT-y6a">
+                                                    <rect key="frame" x="10" y="8" width="354" height="47"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
                         <connections>
-                            <outlet property="dataSource" destination="ZaM-ve-Rkg" id="9Dc-vt-kJt"/>
-                            <outlet property="delegate" destination="ZaM-ve-Rkg" id="cl8-fI-ZNq"/>
+                            <outlet property="dataSource" destination="eQ6-F6-ufy" id="d6B-oH-3tY"/>
+                            <outlet property="delegate" destination="eQ6-F6-ufy" id="bms-Iy-cn0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="qZE-6M-Tdi"/>
+                    <navigationItem key="navigationItem" title="Campanha" id="zF7-yn-GtN">
+                        <barButtonItem key="backBarButtonItem" title="Cancelar" id="tWn-Au-qCQ"/>
+                    </navigationItem>
                     <connections>
-                        <segue destination="dD8-fe-El3" kind="presentation" id="gPW-We-wUE"/>
+                        <segue destination="q9h-Y2-C4U" kind="presentation" id="J7H-xd-4I7"/>
                     </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VDk-Xx-yyD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NUL-GG-qwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-767.5" y="334.5"/>
+            <point key="canvasLocation" x="398.5" y="334.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rt2-Nr-Vsf">
@@ -90,12 +151,12 @@
                         <color key="barTintColor" red="0.76470588240000004" green="0.098039215690000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="ZaM-ve-Rkg" kind="relationship" relationship="rootViewController" id="QXi-q0-ykz"/>
+                        <segue destination="JIU-aA-KWt" kind="relationship" relationship="rootViewController" id="EQz-On-YYM"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="buW-eP-nEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1389" y="335"/>
+            <point key="canvasLocation" x="-1437.5" y="333.5"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="E5P-EK-HGf">
