@@ -10,6 +10,7 @@ import UIKit
 
 class CreateCampaignViewController: UITableViewController {
 
+    @IBOutlet var segmentedControl: UISegmentedControl!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,9 +21,8 @@ class CreateCampaignViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func dismiss() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     // MARK: - Table view data source

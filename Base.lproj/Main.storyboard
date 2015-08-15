@@ -12,6 +12,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.76470588240000004" green="0.098039215690000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="eQ6-F6-ufy" kind="relationship" relationship="rootViewController" id="l2X-J7-Hwi"/>
@@ -34,24 +37,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5sf-OX-0OP" customClass="SwipeView">
-                                <rect key="frame" x="1" y="77" width="374" height="436"/>
+                                <rect key="frame" x="1" y="77" width="374" height="450"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75W-c1-uAE">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="436"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="450"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5el-8a-asV">
-                                <rect key="frame" x="11" y="607" width="354" height="60"/>
+                                <rect key="frame" x="11" y="587" width="354" height="60"/>
                                 <color key="backgroundColor" red="0.090196078431372548" green="0.90196078431372551" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="CRIAR CAMPANHA">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="showCampaign" destination="JIU-aA-KWt" eventType="touchUpInside" id="nRD-5m-NL1"/>
+                                </connections>
                             </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="aAP-RL-zCw">
-                                <rect key="frame" x="162" y="521" width="53" height="37"/>
+                                <rect key="frame" x="162" y="542" width="53" height="37"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="currentPageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </pageControl>
@@ -66,7 +72,7 @@
                     <connections>
                         <outlet property="imageView" destination="75W-c1-uAE" id="SDL-kg-hfh"/>
                         <outlet property="pageControl" destination="aAP-RL-zCw" id="0Dy-yP-MMn"/>
-                        <segue destination="dD8-fe-El3" kind="presentation" id="aCI-Tg-gZX"/>
+                        <segue destination="dD8-fe-El3" kind="presentation" identifier="createCampaign" id="aCI-Tg-gZX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rfp-Ov-O0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -81,10 +87,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="sectionIndexBackgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="Jk0-nL-M8O">
                             <rect key="frame" x="0.0" y="64" width="375" height="244"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONh-pb-oMe">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="U9b-ez-kG0">
                                     <rect key="frame" x="62" y="208" width="250" height="29"/>
                                     <segments>
@@ -95,7 +106,7 @@
                                     <color key="tintColor" red="0.76470588240000004" green="0.098039215690000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </segmentedControl>
                             </subviews>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="vkf-fb-0A3">
                             <rect key="frame" x="0.0" y="617" width="375" height="60"/>
@@ -152,13 +163,22 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Campanha" id="zF7-yn-GtN">
-                        <barButtonItem key="backBarButtonItem" title="Cancelar" id="tWn-Au-qCQ"/>
+                        <connections>
+                            <outlet property="leftBarButtonItem" destination="tWn-Au-qCQ" id="SH0-m0-xnK"/>
+                        </connections>
                     </navigationItem>
                     <connections>
+                        <outlet property="segmentedControl" destination="U9b-ez-kG0" id="fSd-Sk-Omd"/>
                         <segue destination="9yU-xz-tNQ" kind="presentation" id="wC7-pA-fGU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NUL-GG-qwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem title="Cancelar" id="tWn-Au-qCQ">
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="dismiss" destination="eQ6-F6-ufy" id="moV-vo-M6P"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="398.5" y="334.5"/>
         </scene>
@@ -188,6 +208,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="sectionIndexBackgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="UbM-YS-obF">
                             <rect key="frame" x="0.0" y="64" width="375" height="250"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -209,11 +230,19 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="campaignCell" rowHeight="190" id="YBb-zN-dhK">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="campaignCell" rowHeight="190" id="YBb-zN-dhK">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YBb-zN-dhK" id="ulI-41-qeq">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZI-L0-SLn">
+                                            <rect key="frame" x="10" y="5" width="355" height="179"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
