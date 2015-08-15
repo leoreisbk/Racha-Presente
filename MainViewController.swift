@@ -10,11 +10,15 @@ import UIKit
 
 class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelegate {
     
-    @IBOutlet var pageControl: UIPageControl!
+
+    @IBOutlet var pageControl: UIPageControl!{
+        didSet{
+             pageControl.numberOfPages = images.count
+        }
+    }
     @IBOutlet var imageView: UIImageView!
     
-    var images = [UIImage(named: "img1.png"),UIImage(named: "img2.png"),UIImage(named: "img3.png")]
-    
+    var images = [UIImage(named: "banner1.png"),UIImage(named: "banner2.png"),UIImage(named: "banner3.png")]
     
     @IBAction func login() {
         self.performSegueWithIdentifier("", sender: nil)
@@ -32,14 +36,13 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
     
     func numberOfItemsInSwipeView(swipeView: SwipeView!) -> Int {
         let count = images.count
-        pageControl.numberOfPages = count
         return count
     }
     
     func swipeView(swipeView: SwipeView!, viewForItemAtIndex index: Int, reusingView view: UIView!) -> UIView! {
-        imageView = UIImageView(frame: CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height))
+        imageView = UIImageView(frame: CGRectMake(0, 0, 375, 500))
         imageView.image = images[index]
-        //imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
         return imageView
     }
     
@@ -51,9 +54,5 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
     
     func swipeViewItemSize(swipeView: SwipeView!) -> CGSize {
         return CGSizeMake(swipeView.itemSize.width, swipeView.itemSize.height)
-    }
-
-    func swipeView(swipeView: SwipeView!, didSelectItemAtIndex index: Int) {
-        println("Tapppp")
     }
 }

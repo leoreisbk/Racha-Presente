@@ -6,6 +6,6 @@
 //  Copyright (c) 2015 Leonardo Reis. All rights reserved.
 //
 
-#import "SwipeView.h"
+#import <SwipeView/SwipeView.h>
 #import <AWSS3/AWSS3.h>
 
