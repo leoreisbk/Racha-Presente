@@ -76,20 +76,21 @@ class CreateCampaignViewController: UITableViewController, UIImagePickerControll
     */
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        imagePicker.allowsEditing = true;
         imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         imageView.contentMode = UIViewContentMode.ScaleAspectFit
         blurredView.hidden = true
         
         if  let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+
             let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString(".png")
-            let filePath = "/Users/leonardo/Desktop/icon.png"  //NSTemporaryDirectory().stringByAppendingPathComponent("upload").stringByAppendingPathComponent(fileName)
+            let filePath = NSTemporaryDirectory().stringByAppendingPathComponent("temp")
             let imageData = UIImagePNGRepresentation(image)
             imageData.writeToFile(filePath, atomically: true)
             
             let uploadRequest = AWSS3TransferManagerUploadRequest()
             uploadRequest.body = NSURL(fileURLWithPath: filePath)
-            uploadRequest.key = "icon.png" //fileName
+            uploadRequest.key =  fileName   //"icon.png"
             uploadRequest.bucket = "racha-presente-acom"
             
             self.uploadRequests.append(uploadRequest)
@@ -97,6 +98,9 @@ class CreateCampaignViewController: UITableViewController, UIImagePickerControll
             
             self.upload(uploadRequest)
         }
+        
+        
+        imagePicker.dismissViewControllerAnimated(true, completion: nil)
         
         
     }
