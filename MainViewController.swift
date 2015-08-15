@@ -13,7 +13,7 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var imageView: UIImageView!
     
-    var images = [UIImage(named: "step1.png"),UIImage(named: "step2.png"),UIImage(named: "step3.png"),UIImage(named: "step4.png")]
+    var images = [UIImage(named: "img1.png"),UIImage(named: "img2.png"),UIImage(named: "img3.png")]
     
     
     @IBAction func login() {
@@ -43,15 +43,17 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
         return imageView
     }
     
-    func swipeViewItemSize(swipeView: SwipeView!) -> CGSize {
-        return CGSizeMake(self.view.bounds.size.width, swipeView.itemSize.height)
-    }
-    
     // MARK: - SwipeView Delegate
     
     func swipeViewDidScroll(swipeView: SwipeView!) {
         pageControl.currentPage = swipeView.currentItemIndex
     }
+    
+    func swipeViewItemSize(swipeView: SwipeView!) -> CGSize {
+        return CGSizeMake(swipeView.itemSize.width, swipeView.itemSize.height)
+    }
 
-
+    func swipeView(swipeView: SwipeView!, didSelectItemAtIndex index: Int) {
+        println("Tapppp")
+    }
 }

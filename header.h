@@ -7,3 +7,5 @@
 //
 
 #import "SwipeView.h"
+#import <AWSS3/AWSS3.h>
+

@@ -8,81 +8,62 @@
 
 import UIKit
 
-class CreateCampaignViewController: UITableViewController {
+class CreateCampaignViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBOutlet var blurredView: UIView!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var segmentedControl: UISegmentedControl!{
+        didSet{
+            segmentedControl.selectedSegmentIndex = 0
+            segmentedControl.addTarget(self, action:"indexChanged:", forControlEvents: UIControlEvents.ValueChanged)
+        }
+    }
+    
+    var uploadRequests = Array<AWSS3TransferManagerUploadRequest?>()
+    var uploadFileURLs = Array<NSURL?>()
+    let imagePicker = UIImagePickerController()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        imagePicker.delegate = self
+        addEffect()
     }
 
     @IBAction func dismiss() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
+    
+    @IBAction func takePhoto() {
+        
+        let alertController = UIAlertController(title: "Você deseja usar:", message: "", preferredStyle: .Alert)
+        
+        let cameraBtn = UIAlertAction(title: "Usar a câmera", style: .Default) { (action) in
+        
+            self.imagePicker.sourceType = .Camera
+            self.presentViewController(self.imagePicker, animated: true, completion: nil)
+        
+        }
+        alertController.addAction(cameraBtn)
+        
+        let albumBtn = UIAlertAction(title: "Escolher do álbum", style: .Default) {(action) in
+            self.imagePicker.sourceType = .PhotoLibrary
+            self.presentViewController(self.imagePicker, animated: true, completion: nil)
+        
+        }
+        alertController.addAction(albumBtn)
+        
+        let cancelBtn = UIAlertAction(title: "Cancelar", style: .Destructive) {(action) in}
+         alertController.addAction(cancelBtn)
+        
+        self.presentViewController(alertController, animated: true) {}
     }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+    
+    
+    func addEffect() {
+        var effect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let effectView = UIVisualEffectView(effect: effect)
+        blurredView.addSubview(effectView)
     }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation
@@ -93,5 +74,97 @@ class CreateCampaignViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        blurredView.hidden = true
+        
+        if  let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString(".png")
+            let filePath = "/Users/leonardo/Desktop/icon.png"  //NSTemporaryDirectory().stringByAppendingPathComponent("upload").stringByAppendingPathComponent(fileName)
+            let imageData = UIImagePNGRepresentation(image)
+            imageData.writeToFile(filePath, atomically: true)
+            
+            let uploadRequest = AWSS3TransferManagerUploadRequest()
+            uploadRequest.body = NSURL(fileURLWithPath: filePath)
+            uploadRequest.key = "icon.png" //fileName
+            uploadRequest.bucket = "racha-presente-acom"
+            
+            self.uploadRequests.append(uploadRequest)
+            self.uploadFileURLs.append(nil)
+            
+            self.upload(uploadRequest)
+        }
+        
+        
+    }
+    
+    @IBAction func indexChanged(sender : UISegmentedControl) {
+        
+        switch segmentedControl.selectedSegmentIndex {
+            
+        case 1:
+            println("10 dias")
+        case 2:
+            println("15 dias")
+        default:
+            println("5 dias")
+        }
+    }
+    
+    func upload(uploadRequest: AWSS3TransferManagerUploadRequest) {
+        let transferManager = AWSS3TransferManager.defaultS3TransferManager()
+        
+        transferManager.upload(uploadRequest).continueWithBlock { (task) -> AnyObject! in
+            if let error = task.error {
+                if error.domain == AWSS3TransferManagerErrorDomain as String {
+                    if let errorCode = AWSS3TransferManagerErrorType(rawValue: error.code) {
+                        switch (errorCode) {
+                        case .Cancelled, .Paused:
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.tableView.reloadData()
+                            })
+                            break;
+                            
+                        default:
+                            println("upload() failed: [\(error)]")
+                            break;
+                        }
+                    } else {
+                        println("upload() failed: [\(error)]")
+                    }
+                } else {
+                    println("upload() failed: [\(error)]")
+                }
+            }
+            
+            if let exception = task.exception {
+                println("upload() failed: [\(exception)]")
+            }
+            
+            if task.result != nil {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    if let index = self.indexOfUploadRequest(self.uploadRequests, uploadRequest: uploadRequest) {
+                        self.uploadRequests[index] = nil
+                        self.uploadFileURLs[index] = uploadRequest.body
+                        
+                        let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    }
+                })
+            }
+            return nil
+        }
+    }
+    
+    func indexOfUploadRequest(array: Array<AWSS3TransferManagerUploadRequest?>, uploadRequest: AWSS3TransferManagerUploadRequest?) -> Int? {
+        for (index, object) in enumerate(array) {
+            if object == uploadRequest {
+                return index
+            }
+        }
+        return nil
+    }
 }
