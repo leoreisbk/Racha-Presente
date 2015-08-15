@@ -33,19 +33,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5sf-OX-0OP" customClass="SwipeView">
+                                <rect key="frame" x="1" y="77" width="374" height="436"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75W-c1-uAE">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="436"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5el-8a-asV">
-                                <rect key="frame" x="79" y="577" width="217" height="44"/>
-                                <color key="backgroundColor" red="0.76470588240000004" green="0.098039215690000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="11" y="607" width="354" height="60"/>
+                                <color key="backgroundColor" red="0.090196078431372548" green="0.90196078431372551" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Criar">
+                                <state key="normal" title="CRIAR CAMPANHA">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="aAP-RL-zCw">
+                                <rect key="frame" x="162" y="521" width="53" height="37"/>
+                                <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="currentPageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="fVw-Ok-CMZ"/>
+                    <navigationItem key="navigationItem" id="fVw-Ok-CMZ">
+                        <barButtonItem key="rightBarButtonItem" title="Login" id="xuL-pb-iJq">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="imageView" destination="75W-c1-uAE" id="SDL-kg-hfh"/>
+                        <outlet property="pageControl" destination="aAP-RL-zCw" id="0Dy-yP-MMn"/>
                         <segue destination="dD8-fe-El3" kind="presentation" id="aCI-Tg-gZX"/>
                     </connections>
                 </viewController>
@@ -78,17 +98,19 @@
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="vkf-fb-0A3">
-                            <rect key="frame" x="0.0" y="617" width="375" height="52"/>
+                            <rect key="frame" x="0.0" y="617" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PUBLICAR" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Wi-wO-qkC">
-                                    <rect key="frame" x="141" y="14" width="92" height="21"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ucv-2E-w8h">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                    <color key="backgroundColor" red="0.090196078431372548" green="0.90196078431372551" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" title="PUBLICAR">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.14117647059999999" green="0.60784313729999995" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <sections>
                             <tableViewSection id="bO2-9b-Aaz">
@@ -107,7 +129,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="255" id="RmX-UG-EXU">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="245" id="RmX-UG-EXU">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RmX-UG-EXU" id="6Sr-tn-4bC">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -133,7 +155,7 @@
                         <barButtonItem key="backBarButtonItem" title="Cancelar" id="tWn-Au-qCQ"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="q9h-Y2-C4U" kind="presentation" id="J7H-xd-4I7"/>
+                        <segue destination="9yU-xz-tNQ" kind="presentation" id="wC7-pA-fGU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NUL-GG-qwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -158,16 +180,36 @@
             </objects>
             <point key="canvasLocation" x="-1437.5" y="333.5"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Campaign View Controller-->
         <scene sceneID="E5P-EK-HGf">
             <objects>
-                <tableViewController id="oLT-UV-2dZ" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wP1-jS-p8Q">
+                <tableViewController id="oLT-UV-2dZ" customClass="CampaignViewController" customModule="CrowdVoucher" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="wP1-jS-p8Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="UbM-YS-obF">
+                            <rect key="frame" x="0.0" y="64" width="375" height="250"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="u4A-Eg-FSE">
+                            <rect key="frame" x="0.0" y="380" width="375" height="80"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AGx-4F-uTT">
+                                    <rect key="frame" x="0.0" y="20" width="375" height="60"/>
+                                    <color key="backgroundColor" red="0.090196078430000007" green="0.90196078430000004" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <state key="normal" title="ENCERRAR CAMPANHA">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="YBb-zN-dhK">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="campaignCell" rowHeight="190" id="YBb-zN-dhK">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YBb-zN-dhK" id="ulI-41-qeq">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -179,31 +221,67 @@
                             <outlet property="delegate" destination="oLT-UV-2dZ" id="0Av-3M-s0v"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Rhw-76-7cT"/>
+                    <connections>
+                        <segue destination="zgh-68-fAT" kind="presentation" id="zTa-4q-4Mv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kau-bB-b0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1750.5" y="334.5"/>
+            <point key="canvasLocation" x="1446.5" y="333.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IYn-uE-2lx">
+            <objects>
+                <navigationController id="zgh-68-fAT" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="F5H-yw-eSJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.76470588240000004" green="0.098039215690000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="jam-ih-cC7" kind="relationship" relationship="rootViewController" id="BQ0-mW-Y0x"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SjG-5h-iA5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2019" y="335"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="TEr-iY-mdl">
+        <scene sceneID="o3n-j1-96f">
             <objects>
-                <viewController id="q9h-Y2-C4U" sceneMemberID="viewController">
+                <viewController id="jam-ih-cC7" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="N5q-gI-kJH"/>
-                        <viewControllerLayoutGuide type="bottom" id="bQz-U6-XUc"/>
+                        <viewControllerLayoutGuide type="top" id="FOy-JL-vtn"/>
+                        <viewControllerLayoutGuide type="bottom" id="JKa-Dp-NNE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WWK-6y-aFB">
+                    <view key="view" contentMode="scaleToFill" id="flM-Cd-5lv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <segue destination="oLT-UV-2dZ" kind="presentation" id="EzX-WN-t7A"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="ekh-zx-KFb"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o21-P5-fnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lNK-Oe-Dk2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1060.5" y="334.5"/>
+            <point key="canvasLocation" x="2586.5" y="334.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Hcu-oJ-ZcX">
+            <objects>
+                <navigationController id="9yU-xz-tNQ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TNN-WJ-2cE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.76470588240000004" green="0.098039215690000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="oLT-UV-2dZ" kind="relationship" relationship="rootViewController" id="hUh-jr-dox"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F8Q-z4-lz8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="869.5" y="333.5"/>
         </scene>
     </scenes>
 </document>
