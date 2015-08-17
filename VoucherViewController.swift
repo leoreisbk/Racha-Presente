@@ -10,10 +10,17 @@ import UIKit
 
 class VoucherViewController: UIViewController {
 
+    @IBOutlet var voucher: UILabel!{
+        didSet{
+         voucher.text = imageUrl
+        }
+    }
+    var imageUrl: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {

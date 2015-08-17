@@ -10,6 +10,9 @@ import UIKit
 
 class CreateCampaignViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet var campaignTitle: UITextField!
+    @IBOutlet var campaignDescription: UITextView!
+    
     @IBOutlet var blurredView: UIView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var segmentedControl: UISegmentedControl!{
@@ -19,6 +22,7 @@ class CreateCampaignViewController: UITableViewController, UIImagePickerControll
         }
     }
     
+    var imageName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString(".png")
     var uploadRequests = Array<AWSS3TransferManagerUploadRequest?>()
     var uploadFileURLs = Array<NSURL?>()
     let imagePicker = UIImagePickerController()
@@ -26,7 +30,6 @@ class CreateCampaignViewController: UITableViewController, UIImagePickerControll
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
-        addEffect()
     }
 
     @IBAction func dismiss() {
@@ -58,22 +61,50 @@ class CreateCampaignViewController: UITableViewController, UIImagePickerControll
         self.presentViewController(alertController, animated: true) {}
     }
     
-    
-    func addEffect() {
-        var effect = UIBlurEffect(style: UIBlurEffectStyle.Light)
-        let effectView = UIVisualEffectView(effect: effect)
-        blurredView.addSubview(effectView)
+    @IBAction func createCampaign(){
+        postCampaign()
     }
+    
+    func postCampaign(){
 
-    /*
+        let params = ["title":campaignTitle.text,
+                      "description":campaignDescription.text,
+                      "duration": 15,
+                      "image_URL": String(format:"https://s3.amazonaws.com/racha-presente-acom/%@",imageName),
+                      "b2w_customer_id": B2WAccountManager.currentCustomer().identifier
+                     ]
+        
+        let manager = AFHTTPRequestOperationManager()
+        manager.requestSerializer = AFJSONRequestSerializer()
+        manager.POST("https://still-fortress-6278.herokuapp.com/campaigns.json", parameters: params, success: { (request, JSON) -> Void in
+
+        let dict = JSON as! NSDictionary
+    
+        self.performSegueWithIdentifier("showCampaign", sender: dict)
+        println(dict)
+            
+        }) { (request, error) -> Void in
+            println(error.description)
+        }
+    }
+    
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+
+        let dict = sender as! NSDictionary
+        
+        if segue.identifier == "showCampaign"{
+         
+            let campaignController = (segue.destinationViewController as! UINavigationController).topViewController as! CampaignViewController
+            campaignController.imageUrl = dict["voucher_id"] as! String
+            
+        }
+    
     }
-    */
+
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         imagePicker.allowsEditing = true;
@@ -83,14 +114,13 @@ class CreateCampaignViewController: UITableViewController, UIImagePickerControll
         
         if  let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
 
-            let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString(".png")
             let filePath = NSTemporaryDirectory().stringByAppendingPathComponent("temp")
             let imageData = UIImagePNGRepresentation(image)
             imageData.writeToFile(filePath, atomically: true)
             
             let uploadRequest = AWSS3TransferManagerUploadRequest()
             uploadRequest.body = NSURL(fileURLWithPath: filePath)
-            uploadRequest.key =  fileName   //"icon.png"
+            uploadRequest.key =  imageName   //"icon.png"
             uploadRequest.bucket = "racha-presente-acom"
             
             self.uploadRequests.append(uploadRequest)
@@ -101,8 +131,6 @@ class CreateCampaignViewController: UITableViewController, UIImagePickerControll
         
         
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
-        
-        
     }
     
     @IBAction func indexChanged(sender : UISegmentedControl) {

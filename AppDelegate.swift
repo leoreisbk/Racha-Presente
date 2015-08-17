@@ -15,6 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        
+        B2WAPIReviews.setAPIKey("oqu6lchjs2mb5jp55bl55ov0d", staging: false)
+        B2WAPIClient.setBaseURLString("http://www.americanas.com.br", brandCode: "ACOM", apiKey: "5fa68e16da6b8a476756f341ea3906d0")
+        
+        
         let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId:"us-east-1:330f2f46-be61-4fce-b5df-f492a386d0bd")
         let configuration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
         AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration

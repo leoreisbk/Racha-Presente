@@ -21,11 +21,26 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
     var images = [UIImage(named: "banner1.png"),UIImage(named: "banner2.png"),UIImage(named: "banner3.png")]
     
     @IBAction func login() {
-        self.performSegueWithIdentifier("", sender: nil)
+        B2WAccountManager.sharedManager().presentLoginViewControllerWithUserSignedInHandler({ () -> Void in
+            B2WAccountManager.requestCustomerInformationWithCompletion({ () -> Void in
+            })
+            }, failedHandler: nil, canceledHandler: nil)
+        
     }
     
     @IBAction func showCampaign() {
-        self.performSegueWithIdentifier("createCampaign", sender: nil)
+        
+        if B2WAPIAccount.isLoggedIn() {
+            B2WAccountManager.requestCustomerInformationWithCompletion({ () -> Void in
+                self.performSegueWithIdentifier("createCampaign", sender: nil)
+            })
+        }else{
+            B2WAccountManager.sharedManager().presentLoginViewControllerWithUserSignedInHandler({ () -> Void in
+                B2WAccountManager.requestCustomerInformationWithCompletion({ () -> Void in
+                    self.performSegueWithIdentifier("createCampaign", sender: nil)
+                })
+                }, failedHandler: nil, canceledHandler: nil)
+        }
     }
     
     override func viewDidLoad() {

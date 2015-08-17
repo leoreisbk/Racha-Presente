@@ -70,6 +70,9 @@
                     <navigationItem key="navigationItem" id="fVw-Ok-CMZ">
                         <barButtonItem key="rightBarButtonItem" title="Login" id="xuL-pb-iJq">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="login" destination="JIU-aA-KWt" id="KSU-7J-Iea"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -147,6 +150,9 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="createCampaign" destination="eQ6-F6-ufy" eventType="touchUpInside" id="e5F-bK-wWp"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -154,7 +160,7 @@
                         <sections>
                             <tableViewSection id="bO2-9b-Aaz">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="titleCell" id="pD0-el-gYG">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="titleCell" id="pD0-el-gYG">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pD0-el-gYG" id="nre-NU-JQU">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -168,15 +174,14 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="245" id="RmX-UG-EXU">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="105" id="RmX-UG-EXU">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RmX-UG-EXU" id="6Sr-tn-4bC">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Axr-iO-vj3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="244"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" text="Descrição da Campanha do amigo." translatesAutoresizingMaskIntoConstraints="NO" id="Axr-iO-vj3">
+                                                    <rect key="frame" x="10" y="0.0" width="365" height="96"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -199,9 +204,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="blurredView" destination="kJY-Rb-QeG" id="eL3-ga-zmR"/>
+                        <outlet property="campaignDescription" destination="Axr-iO-vj3" id="Czh-Qe-HQY"/>
+                        <outlet property="campaignTitle" destination="SRD-Gc-jAd" id="be2-uA-2Go"/>
                         <outlet property="imageView" destination="ONh-pb-oMe" id="5vs-3R-nZ1"/>
                         <outlet property="segmentedControl" destination="U9b-ez-kG0" id="fSd-Sk-Omd"/>
-                        <segue destination="9yU-xz-tNQ" kind="presentation" id="wC7-pA-fGU"/>
+                        <segue destination="9yU-xz-tNQ" kind="presentation" identifier="showCampaign" id="wC7-pA-fGU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NUL-GG-qwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -252,25 +259,25 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
                                     <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="14 dias para acabar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09f-CS-5uL" userLabel="campaignDaily">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15 dias para acabar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09f-CS-5uL" userLabel="campaignDaily">
                                     <rect key="frame" x="8" y="160" width="234" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12 Contribuições" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCn-QO-o2B" userLabel="shareCount">
-                                    <rect key="frame" x="8" y="203" width="199" height="51"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Não há contribuição ainda" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCn-QO-o2B" userLabel="shareCount">
+                                    <rect key="frame" x="8" y="203" width="232" height="51"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R$ 800 arrecadados" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rrk-on-0sS" userLabel="totalAmount">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Não há valor arrecadado ainda" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rrk-on-0sS" userLabel="totalAmount">
                                     <rect key="frame" x="8" y="262" width="276" height="44"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <color key="textColor" red="0.090196078430000007" green="0.90196078430000004" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Preciso de um par de olhos verdes novos" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKa-mH-3CA" userLabel="campaignTitle">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Campanha 15/08" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKa-mH-3CA" userLabel="campaignTitle">
                                     <rect key="frame" x="21" y="48" width="333" height="64"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -290,6 +297,9 @@
                                     <state key="normal" title="ENCERRAR CAMPANHA">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="showVoucher" destination="oLT-UV-2dZ" eventType="touchUpInside" id="BX9-n4-3dI"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -303,22 +313,15 @@
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZI-L0-SLn">
                                             <rect key="frame" x="10" y="5" width="355" height="146"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R$ 1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6c1-88-bJG" userLabel="price">
-                                                    <rect key="frame" x="8" y="8" width="116" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15/08" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rme-Zs-RMJ" userLabel="date">
-                                                    <rect key="frame" x="281" y="8" width="66" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ai meu amigo! Vi que você realmente precisa de um par de olhos." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lp3-dB-Gj6" userLabel="message">
-                                                    <rect key="frame" x="8" y="46" width="339" height="92"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="https://still-fortress-6278.herokuapp.com/campaigns/02-94311023-1/contributions/new" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UAb-NY-2OO">
+                                                    <rect key="frame" x="8" y="49" width="339" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Compartilhe esse link" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ade-z5-keV">
+                                                    <rect key="frame" x="10" y="18" width="181" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -337,7 +340,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Rhw-76-7cT"/>
                     <connections>
-                        <segue destination="zgh-68-fAT" kind="presentation" id="zTa-4q-4Mv"/>
+                        <outlet property="campaignTitle" destination="CKa-mH-3CA" id="3vW-79-0Wf"/>
+                        <outlet property="duration" destination="09f-CS-5uL" id="xjR-gz-K1c"/>
+                        <outlet property="imageView" destination="QG9-Gz-Bwf" id="u44-4d-Dqf"/>
+                        <outlet property="totalAmount" destination="Rrk-on-0sS" id="ij1-Du-f3g"/>
+                        <segue destination="zgh-68-fAT" kind="presentation" identifier="voucherCampaign" id="zTa-4q-4Mv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kau-bB-b0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -361,10 +368,10 @@
             </objects>
             <point key="canvasLocation" x="2019" y="335"/>
         </scene>
-        <!--View Controller-->
+        <!--Voucher View Controller-->
         <scene sceneID="o3n-j1-96f">
             <objects>
-                <viewController id="jam-ih-cC7" sceneMemberID="viewController">
+                <viewController id="jam-ih-cC7" customClass="VoucherViewController" customModule="CrowdVoucher" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FOy-JL-vtn"/>
                         <viewControllerLayoutGuide type="bottom" id="JKa-Dp-NNE"/>
@@ -379,15 +386,21 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic-voucher.png" translatesAutoresizingMaskIntoConstraints="NO" id="gS5-97-UTh">
                                         <rect key="frame" x="53" y="161" width="268" height="144"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R$ 1000,00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJ3-vt-d6a" userLabel="voucherAmount">
-                                        <rect key="frame" x="97" y="208" width="181" height="49"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Parabéns! Você ganhou:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzA-pg-cy1">
                                         <rect key="frame" x="74" y="93" width="227" height="38"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="voucher" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aT3-GJ-VTg">
+                                        <rect key="frame" x="53" y="411" width="237" height="52"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" red="0.090196078430000007" green="0.90196078430000004" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R$ 40,00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJ3-vt-d6a" userLabel="voucherAmount">
+                                        <rect key="frame" x="123" y="208" width="129" height="49"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -398,6 +411,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ekh-zx-KFb"/>
+                    <connections>
+                        <outlet property="voucher" destination="aT3-GJ-VTg" id="ss8-Vf-yvg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lNK-Oe-Dk2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

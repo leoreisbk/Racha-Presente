@@ -8,4 +8,5 @@
 
 #import <SwipeView/SwipeView.h>
 #import <AWSS3/AWSS3.h>
+#import <B2WKit/B2WKit.h>
 
