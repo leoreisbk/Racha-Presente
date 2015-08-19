@@ -22,7 +22,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HfP-1Z-KGI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-222.5" y="334.5"/>
+            <point key="canvasLocation" x="-841.5" y="1273.5"/>
         </scene>
         <!--Main-->
         <scene sceneID="pfj-pZ-uxa">
@@ -77,13 +77,15 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="Zvc-Ef-I4m" id="vE1-BS-6wP"/>
+                        <outlet property="loginButton" destination="xuL-pb-iJq" id="IOz-l2-9Zz"/>
                         <outlet property="pageControl" destination="aAP-RL-zCw" id="J45-4e-sF5"/>
                         <segue destination="dD8-fe-El3" kind="presentation" identifier="createCampaign" id="aCI-Tg-gZX"/>
+                        <segue destination="9yU-xz-tNQ" kind="presentation" identifier="campaign" id="Gxi-30-Wdz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rfp-Ov-O0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-829.5" y="333.5"/>
+            <point key="canvasLocation" x="-841.5" y="333.5"/>
         </scene>
         <!--Campanha-->
         <scene sceneID="fAO-Bk-Ov6">
@@ -92,7 +94,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QVU-vs-8tX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="Jk0-nL-M8O">
                             <rect key="frame" x="0.0" y="64" width="375" height="244"/>
@@ -121,7 +123,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="takePhoto" destination="eQ6-F6-ufy" eventType="touchUpInside" id="zvU-5D-Z3I"/>
+                                                <action selector="showActionSheet:" destination="eQ6-F6-ufy" eventType="touchUpInside" id="5ed-ho-sHG"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -179,7 +181,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RmX-UG-EXU" id="6Sr-tn-4bC">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" text="Descrição da Campanha do amigo." translatesAutoresizingMaskIntoConstraints="NO" id="Axr-iO-vj3">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" text="Descrição da Campanha do amigo que temos somentes duas ou três linhas para preencher." translatesAutoresizingMaskIntoConstraints="NO" id="Axr-iO-vj3">
                                                     <rect key="frame" x="10" y="0.0" width="365" height="96"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -219,7 +221,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="398.5" y="334.5"/>
+            <point key="canvasLocation" x="-97.5" y="1273.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rt2-Nr-Vsf">
@@ -246,7 +248,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="157" sectionHeaderHeight="10" sectionFooterHeight="10" id="wP1-jS-p8Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="UbM-YS-obF">
                             <rect key="frame" x="0.0" y="64" width="375" height="306"/>
@@ -257,7 +259,7 @@
                                 </imageView>
                                 <view alpha="0.34999999999999964" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W7w-Tv-b3Q">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15 dias para acabar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09f-CS-5uL" userLabel="campaignDaily">
                                     <rect key="frame" x="8" y="160" width="234" height="35"/>
@@ -313,15 +315,22 @@
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZI-L0-SLn">
                                             <rect key="frame" x="10" y="5" width="355" height="146"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="https://still-fortress-6278.herokuapp.com/campaigns/02-94311023-1/contributions/new" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UAb-NY-2OO">
-                                                    <rect key="frame" x="8" y="49" width="339" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Compartilhe esse link" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ade-z5-keV">
-                                                    <rect key="frame" x="10" y="18" width="181" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="333" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R$ 1.000,00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ade-z5-keV">
+                                                    <rect key="frame" x="8" y="8" width="135" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="334" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="13/08" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2c-xb-5Gd">
+                                                    <rect key="frame" x="295" y="15" width="52" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="335" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aí meu amigo, realmente vi que vc precisa desse presente. Aproveite e curta bastante. Raxa presente sempre a melhor opção." lineBreakMode="clip" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEZ-hn-OrU">
+                                                    <rect key="frame" x="8" y="52" width="339" height="65"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -349,7 +358,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kau-bB-b0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1446.5" y="333.5"/>
+            <point key="canvasLocation" x="626.5" y="334.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IYn-uE-2lx">
@@ -366,7 +375,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SjG-5h-iA5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2019" y="335"/>
+            <point key="canvasLocation" x="1402.5" y="334.5"/>
         </scene>
         <!--Voucher View Controller-->
         <scene sceneID="o3n-j1-96f">
@@ -405,7 +414,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -417,7 +426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lNK-Oe-Dk2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2586.5" y="334.5"/>
+            <point key="canvasLocation" x="2094.5" y="334.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hcu-oJ-ZcX">
@@ -434,11 +443,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F8Q-z4-lz8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="869.5" y="333.5"/>
+            <point key="canvasLocation" x="-54.5" y="334.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="ic-camera" width="34" height="23"/>
         <image name="ic-voucher.png" width="538" height="288"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Gxi-30-Wdz"/>
+    </inferredMetricsTieBreakers>
 </document>

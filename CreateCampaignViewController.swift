@@ -8,11 +8,10 @@
 
 import UIKit
 
-class CreateCampaignViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var campaignTitle: UITextField!
     @IBOutlet var campaignDescription: UITextView!
-    
     @IBOutlet var blurredView: UIView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var segmentedControl: UISegmentedControl!{
@@ -22,131 +21,163 @@ class CreateCampaignViewController: UITableViewController, UIImagePickerControll
         }
     }
     
+    var campaignExpiration = 5
     var imageName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString(".png")
     var uploadRequests = Array<AWSS3TransferManagerUploadRequest?>()
     var uploadFileURLs = Array<NSURL?>()
-    let imagePicker = UIImagePickerController()
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker.delegate = self
     }
 
     @IBAction func dismiss() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func takePhoto() {
-        
-        let alertController = UIAlertController(title: "Você deseja usar:", message: "", preferredStyle: .Alert)
-        
-        let cameraBtn = UIAlertAction(title: "Usar a câmera", style: .Default) { (action) in
-        
-            self.imagePicker.sourceType = .Camera
-            self.presentViewController(self.imagePicker, animated: true, completion: nil)
-        
-        }
-        alertController.addAction(cameraBtn)
-        
-        let albumBtn = UIAlertAction(title: "Escolher do álbum", style: .Default) {(action) in
-            self.imagePicker.sourceType = .PhotoLibrary
-            self.presentViewController(self.imagePicker, animated: true, completion: nil)
-        
-        }
-        alertController.addAction(albumBtn)
-        
-        let cancelBtn = UIAlertAction(title: "Cancelar", style: .Destructive) {(action) in}
-         alertController.addAction(cancelBtn)
-        
-        self.presentViewController(alertController, animated: true) {}
+    @IBAction func showActionSheet(sender: UIButton){
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil)
+        actionSheet.actionSheetStyle = .Default
+        actionSheet.addButtonWithTitle("Take Photo")
+        actionSheet.addButtonWithTitle("Choose Photo")
+        actionSheet.addButtonWithTitle("Search Photo")
+        actionSheet.showInView(self.view)
     }
+    
+    // MARK - UIActionSheetDelegate methods
+    
+    func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int) {
+        switch actionSheet.buttonTitleAtIndex(buttonIndex) {
+            
+        case "Choose Photo":
+            presentImagePickerWithSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
+            break
+        case "Search Photo":
+             photoSearch()
+            break
+        default:
+             presentImagePickerWithSourceType(UIImagePickerControllerSourceType.Camera)
+            break
+        }
+    }
+    
     
     @IBAction func createCampaign(){
         postCampaign()
     }
     
     func postCampaign(){
-
+        
         let params = ["title":campaignTitle.text,
-                      "description":campaignDescription.text,
-                      "duration": 15,
-                      "image_URL": String(format:"https://s3.amazonaws.com/racha-presente-acom/%@",imageName),
-                      "b2w_customer_id": B2WAccountManager.currentCustomer().identifier
-                     ]
+            "description":campaignDescription.text,
+            "duration": campaignExpiration,
+            "image_URL": String(format:"https://s3.amazonaws.com/racha-presente-acom/%@",imageName),
+            "b2w_customer_id": B2WAccountManager.currentCustomer().identifier
+        ]
         
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.POST("https://still-fortress-6278.herokuapp.com/campaigns.json", parameters: params, success: { (request, JSON) -> Void in
-
-        let dict = JSON as! NSDictionary
-    
-        self.performSegueWithIdentifier("showCampaign", sender: dict)
-        println(dict)
             
-        }) { (request, error) -> Void in
-            println(error.description)
+            let dict = JSON as! NSDictionary
+            let campaign = Campaign(campaignDict: dict)
+            self.performSegueWithIdentifier("showCampaign", sender: campaign)
+            println(campaign)
+            
+            }) { (request, error) -> Void in
+                println(error.description)
         }
     }
     
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
-        let dict = sender as! NSDictionary
+    
+    func photoSearch() {
         
-        if segue.identifier == "showCampaign"{
-         
-            let campaignController = (segue.destinationViewController as! UINavigationController).topViewController as! CampaignViewController
-            campaignController.imageUrl = dict["voucher_id"] as! String
-            
+        let pickerController = DZNPhotoPickerController()
+        pickerController.supportedServices = DZNPhotoPickerControllerServices.ServiceGoogleImages
+        pickerController.allowsEditing = false
+        pickerController.cropMode = DZNPhotoEditorViewControllerCropMode.Square
+        pickerController.cropSize = CGSizeMake(imageView.frame.width, imageView.frame.height)
+        
+        pickerController.finalizationBlock = { (pickerController, info) in
+            self.updateImageWithPayload(info)
+            self.dismissPickerController(pickerController)
         }
-    
+        
+        pickerController.cancellationBlock = { (pickerController) in
+            self.dismissPickerController(pickerController)
+        }
+        
+        self.presentViewController(pickerController, animated: true, completion: nil)
     }
-
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        imagePicker.allowsEditing = true;
-        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+    func presentImagePickerWithSourceType(sourceType: UIImagePickerControllerSourceType) {
+        
+        let picker = UIImagePickerController()
+        picker.sourceType = sourceType
+        picker.allowsEditing = true
+        picker.delegate = self
+        picker.cropMode = DZNPhotoEditorViewControllerCropMode.Square
+
+        self.presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    func updateImageWithPayload(payload:[NSObject : AnyObject]) {
+        let image = payload[UIImagePickerControllerOriginalImage] as? UIImage
+        imageView.image = image
         blurredView.hidden = true
         
-        if  let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-
-            let filePath = NSTemporaryDirectory().stringByAppendingPathComponent("temp")
-            let imageData = UIImagePNGRepresentation(image)
-            imageData.writeToFile(filePath, atomically: true)
-            
-            let uploadRequest = AWSS3TransferManagerUploadRequest()
-            uploadRequest.body = NSURL(fileURLWithPath: filePath)
-            uploadRequest.key =  imageName   //"icon.png"
-            uploadRequest.bucket = "racha-presente-acom"
-            
-            self.uploadRequests.append(uploadRequest)
-            self.uploadFileURLs.append(nil)
-            
-            self.upload(uploadRequest)
-        }
-        
-        
-        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        uploadImageToAWS(image!)
+    }
+    
+    func dismissPickerController(controller: UIViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func handlePicker(picker: UIImagePickerController, info:[NSObject : AnyObject]) {
+        updateImageWithPayload(info)
+        dismissPickerController(picker)
+    }
+    
+    
+    // MARK - UIImagePickerControllerDelegate methods
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        handlePicker(picker, info: info)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
     }
     
     @IBAction func indexChanged(sender : UISegmentedControl) {
-        
         switch segmentedControl.selectedSegmentIndex {
-            
         case 1:
-            println("10 dias")
+            campaignExpiration = 10
         case 2:
-            println("15 dias")
+            campaignExpiration = 15
         default:
-            println("5 dias")
+            campaignExpiration = 5
         }
     }
     
+    func uploadImageToAWS(image: UIImage) {
+        
+        let filePath = NSTemporaryDirectory().stringByAppendingPathComponent("temp")
+        let imageData = UIImagePNGRepresentation(image)
+        imageData.writeToFile(filePath, atomically: true)
+        
+        let uploadRequest = AWSS3TransferManagerUploadRequest()
+        uploadRequest.body = NSURL(fileURLWithPath: filePath)
+        uploadRequest.key =  imageName
+        uploadRequest.bucket = kAWSBucketName
+        
+        self.uploadRequests.append(uploadRequest)
+        self.uploadFileURLs.append(nil)
+        
+        self.upload(uploadRequest)
+        
+    }
+    
     func upload(uploadRequest: AWSS3TransferManagerUploadRequest) {
+        
         let transferManager = AWSS3TransferManager.defaultS3TransferManager()
         
         transferManager.upload(uploadRequest).continueWithBlock { (task) -> AnyObject! in
@@ -198,5 +229,16 @@ class CreateCampaignViewController: UITableViewController, UIImagePickerControll
             }
         }
         return nil
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let campaign = sender as! Campaign
+        if segue.identifier == "showCampaign"{
+            let campaignController = (segue.destinationViewController as! UINavigationController).topViewController as! CampaignViewController
+            campaignController.campaign = campaign
+        }
     }
 }

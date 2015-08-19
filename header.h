@@ -10,3 +10,9 @@
 #import <AWSS3/AWSS3.h>
 #import <B2WKit/B2WKit.h>
 
+#import "Private.h"
+
+#import "DZNPhotoPickerController.h"
+#import "UIImagePickerController+Edit.h"
+
+#import <AFNetworking/UIImageView+AFNetworking.h>
