@@ -10,24 +10,36 @@ import UIKit
 
 class VoucherViewController: UIViewController {
 
-    @IBOutlet var voucher: UILabel!{
+    @IBOutlet var amountLabel: UILabel!{
         didSet{
-         voucher.text = imageUrl
+            amountLabel.text = numberFormatter(campaign.totalAmount)
         }
     }
-    var imageUrl: String!
+    @IBOutlet var voucher: UILabel!{
+        didSet{
+         voucher.text = campaign.voucherID
+        }
+    }
+    var campaign: Campaign!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    func numberFormatter(amount: CGFloat) -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: "pt_BR")
+        let number = formatter.stringFromNumber(amount)
+        return number!
+    }
+    
+    @IBAction func dismiss() {
+        self.dismissViewControllerAnimated(true, completion: {
+            let secondPresentingVC = self.presentedViewController?.presentedViewController
+            secondPresentingVC?.dismissViewControllerAnimated(true, completion: {})
+        })
+    }
 
     /*
     // MARK: - Navigation

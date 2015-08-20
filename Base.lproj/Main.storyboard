@@ -76,6 +76,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="createCampaign" destination="5el-8a-asV" id="o2b-MA-emg"/>
                         <outlet property="imageView" destination="Zvc-Ef-I4m" id="vE1-BS-6wP"/>
                         <outlet property="loginButton" destination="xuL-pb-iJq" id="IOz-l2-9Zz"/>
                         <outlet property="pageControl" destination="aAP-RL-zCw" id="J45-4e-sF5"/>
@@ -221,7 +222,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="-97.5" y="1273.5"/>
+            <point key="canvasLocation" x="-270.5" y="1273.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rt2-Nr-Vsf">
@@ -347,7 +348,17 @@
                             <outlet property="delegate" destination="oLT-UV-2dZ" id="0Av-3M-s0v"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Rhw-76-7cT"/>
+                    <navigationItem key="navigationItem" id="Rhw-76-7cT">
+                        <barButtonItem key="rightBarButtonItem" title="Compartilhar" id="PZl-rl-zdy">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="shareCampaign" destination="oLT-UV-2dZ" id="yQZ-ng-IX4"/>
+                            </connections>
+                        </barButtonItem>
+                        <connections>
+                            <outlet property="leftBarButtonItem" destination="0iO-7c-pjY" id="e5U-tc-yr8"/>
+                        </connections>
+                    </navigationItem>
                     <connections>
                         <outlet property="campaignTitle" destination="CKa-mH-3CA" id="3vW-79-0Wf"/>
                         <outlet property="duration" destination="09f-CS-5uL" id="xjR-gz-K1c"/>
@@ -357,8 +368,14 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kau-bB-b0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem title="Fechar" id="0iO-7c-pjY">
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="dismiss" destination="oLT-UV-2dZ" id="PCq-2n-pRx"/>
+                    </connections>
+                </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="626.5" y="334.5"/>
+            <point key="canvasLocation" x="330.5" y="333.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IYn-uE-2lx">
@@ -375,7 +392,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SjG-5h-iA5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1402.5" y="334.5"/>
+            <point key="canvasLocation" x="918.5" y="333.5"/>
         </scene>
         <!--Voucher View Controller-->
         <scene sceneID="o3n-j1-96f">
@@ -396,8 +413,8 @@
                                         <rect key="frame" x="53" y="161" width="268" height="144"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Parabéns! Você ganhou:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzA-pg-cy1">
-                                        <rect key="frame" x="74" y="93" width="227" height="38"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="74" y="93" width="273" height="38"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -407,8 +424,8 @@
                                         <color key="textColor" red="0.090196078430000007" green="0.90196078430000004" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R$ 40,00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJ3-vt-d6a" userLabel="voucherAmount">
-                                        <rect key="frame" x="123" y="208" width="129" height="49"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R$ 40,00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJ3-vt-d6a" userLabel="voucherAmount">
+                                        <rect key="frame" x="84" y="208" width="206" height="49"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -419,14 +436,25 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ekh-zx-KFb"/>
+                    <navigationItem key="navigationItem" id="ekh-zx-KFb">
+                        <connections>
+                            <outlet property="leftBarButtonItem" destination="UuK-1A-NBW" id="BpA-6a-ebK"/>
+                        </connections>
+                    </navigationItem>
                     <connections>
+                        <outlet property="amountLabel" destination="sJ3-vt-d6a" id="Grf-Rq-R4h"/>
                         <outlet property="voucher" destination="aT3-GJ-VTg" id="ss8-Vf-yvg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lNK-Oe-Dk2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem title="Sair" id="UuK-1A-NBW">
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="dismiss" destination="jam-ih-cC7" id="6Pq-OG-i4a"/>
+                    </connections>
+                </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="2094.5" y="334.5"/>
+            <point key="canvasLocation" x="1453.5" y="333.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hcu-oJ-ZcX">
@@ -443,7 +471,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F8Q-z4-lz8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-54.5" y="334.5"/>
+            <point key="canvasLocation" x="-270.5" y="333.5"/>
         </scene>
     </scenes>
     <resources>
@@ -451,6 +479,6 @@
         <image name="ic-voucher.png" width="538" height="288"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Gxi-30-Wdz"/>
+        <segue reference="wC7-pA-fGU"/>
     </inferredMetricsTieBreakers>
 </document>

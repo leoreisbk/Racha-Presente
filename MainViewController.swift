@@ -10,6 +10,11 @@ import UIKit
 
 class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelegate {
     
+    @IBOutlet var createCampaign: UIButton!{
+        didSet{
+            createCampaign.setTitle(B2WAPIAccount.isLoggedIn() ? "ABRIR CAMPANHA": "CRIAR CAMPANHA", forState: UIControlState.Normal)
+        }
+    }
     @IBOutlet var loginButton: UIBarButtonItem!{
         didSet{
             loginButton.title = B2WAPIAccount.isLoggedIn() ? "Logout": "Login"
@@ -17,7 +22,7 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
     }
     @IBOutlet var pageControl: UIPageControl!{
         didSet{
-             pageControl.numberOfPages = images.count
+            pageControl.numberOfPages = images.count
         }
     }
     @IBOutlet var imageView: UIImageView!
@@ -25,35 +30,30 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
     var images = [UIImage(named: "banner1.png"),UIImage(named: "banner2.png"),UIImage(named: "banner3.png")]
     
     @IBAction func login() {
-        
         if B2WAPIAccount.isLoggedIn() {
             B2WAPIAccount.logout()
             loginButton.title = "Login"
-            
+            createCampaign.setTitle("CRIAR CAMPANHA", forState: UIControlState.Normal)
         } else {
-            
             B2WAccountManager.sharedManager().presentLoginViewControllerWithUserSignedInHandler({ () -> Void in
                 B2WAccountManager.requestCustomerInformationWithCompletion({ () -> Void in
                     self.loginButton.title = "Logout"
                     self.requestCampaign(B2WAccountManager.currentCustomer().identifier)
                 })
                 }, failedHandler: nil, canceledHandler: nil)
-            
         }
-        
     }
     
     @IBAction func showCampaign() {
-        
         if B2WAPIAccount.isLoggedIn() {
             B2WAccountManager.requestCustomerInformationWithCompletion({ () -> Void in
-                self.performSegueWithIdentifier("createCampaign", sender: nil)
+                self.requestCampaign(B2WAccountManager.currentCustomer().identifier)
             })
         }else{
             B2WAccountManager.sharedManager().presentLoginViewControllerWithUserSignedInHandler({ () -> Void in
                 B2WAccountManager.requestCustomerInformationWithCompletion({ () -> Void in
                     self.loginButton.title = "Logout"
-                    self.performSegueWithIdentifier("createCampaign", sender: nil)
+                    self.requestCampaign(B2WAccountManager.currentCustomer().identifier)
                 })
                 }, failedHandler: nil, canceledHandler: nil)
         }
@@ -63,10 +63,10 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
         super.viewDidLoad()
     }
     
-    
     func requestCampaign(customerID: String){
-        //02-36472825-1  Mion
+        //02-36472825-1 Mion
         //02-44336934-1 Leo
+        //02-94311023-1 Igor
         
         let urlString = String(format:"https://still-fortress-6278.herokuapp.com/campaigns/%@.json",customerID)
         let manager = AFHTTPRequestOperationManager()
@@ -74,16 +74,18 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
         manager.GET(urlString, parameters: nil, success: { (request, JSON) -> Void in
             
             let dict = JSON as! NSDictionary
-            
             if let customer: String = dict["b2w_customer_id"] as? String {
                 let campaign = Campaign(campaignDict: dict)
+                self.createCampaign.setTitle("ABRIR CAMPANHA", forState: UIControlState.Normal)
                 self.performSegueWithIdentifier("campaign", sender: campaign)
+            }else {
+                self.performSegueWithIdentifier("createCampaign", sender: nil)
             }
             
-            println(dict)
-            
-        }) { (request, error) -> Void in
-            println(error.description)
+            }) { (request, error) -> Void in
+                if request.response.statusCode == 500 {
+                    self.performSegueWithIdentifier("createCampaign", sender: nil)
+                }
         }
     }
     
@@ -115,8 +117,8 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let campaign = sender as! Campaign
         if segue.identifier == "campaign" {
+            let campaign = sender as! Campaign
             let campaignController = (segue.destinationViewController as! UINavigationController).topViewController as! CampaignViewController
             campaignController.campaign = campaign
         }
