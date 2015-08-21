@@ -67,8 +67,9 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
         //02-36472825-1 Mion
         //02-44336934-1 Leo
         //02-94311023-1 Igor
+        //02-91114645-1 Android
         
-        let urlString = String(format:"https://still-fortress-6278.herokuapp.com/campaigns/%@.json",customerID)
+        let urlString = String(format:"https://still-fortress-6278.herokuapp.com/campaigns/%@.json","02-91114645-1")
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.GET(urlString, parameters: nil, success: { (request, JSON) -> Void in
@@ -84,6 +85,7 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
             
             }) { (request, error) -> Void in
                 if request.response.statusCode == 500 {
+                    self.createCampaign.setTitle("CRIAR CAMPANHA", forState: UIControlState.Normal)
                     self.performSegueWithIdentifier("createCampaign", sender: nil)
                 }
         }

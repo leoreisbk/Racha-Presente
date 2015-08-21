@@ -28,15 +28,21 @@ class CampaignViewController: UITableViewController {
     @IBOutlet var imageView: UIImageView!{
         didSet{
             imageView.setImageWithURL(NSURL(string: campaign.imageURL))
+            imageView.contentMode = UIViewContentMode.ScaleAspectFit
         }
     }
     
+    @IBOutlet var totalContribution: UILabel!{
+        didSet{
+            var quantity = campaign.contributions.count
+            totalContribution.text = quantity > 0 ? String(format:"%d contribuição(s)", quantity) : "Não há contribuição ainda"
+        }
+    }
     var campaign: Campaign!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
     
     func numberFormatter(amount: CGFloat) -> String {
         let formatter = NSNumberFormatter()

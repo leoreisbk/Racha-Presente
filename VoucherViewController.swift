@@ -8,22 +8,50 @@
 
 import UIKit
 
+
+extension UILeoButton {
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
+    }
+}
+
+@IBDesignable
+class UILeoButton: UIButton {
+    //
+}
+
 class VoucherViewController: UIViewController {
 
+    @IBOutlet var imageBlurred: UIImageView!{
+        didSet{
+            imageBlurred.setImageWithURL(NSURL(string: campaign.imageURL))
+        }
+    }
     @IBOutlet var amountLabel: UILabel!{
         didSet{
             amountLabel.text = numberFormatter(campaign.totalAmount)
         }
     }
-    @IBOutlet var voucher: UILabel!{
-        didSet{
-         voucher.text = campaign.voucherID
-        }
-    }
+    
     var campaign: Campaign!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    @IBAction func copyVoucher() {
+    UIPasteboard.generalPasteboard().string = campaign.voucherID
+    }
+    
+    
+    @IBAction func openACOM(){
+      UIApplication.sharedApplication().openURL(NSURL(string: "americanas://americanas.com.br/")!)
     }
     
     func numberFormatter(amount: CGFloat) -> String {

@@ -8,11 +8,14 @@
 
 import UIKit
 
-class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
-    @IBOutlet var campaignTitle: UITextField!
+    @IBOutlet var campaignTitle: UITextField!{
+        didSet{
+            campaignTitle.delegate = self
+        }
+    }
     @IBOutlet var campaignDescription: UITextView!
-    @IBOutlet var blurredView: UIView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var segmentedControl: UISegmentedControl!{
         didSet{
@@ -60,7 +63,6 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
         }
     }
     
-    
     @IBAction func createCampaign(){
         postCampaign()
     }
@@ -90,7 +92,6 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
     
     
     func photoSearch() {
-        
         let pickerController = DZNPhotoPickerController()
         pickerController.supportedServices = DZNPhotoPickerControllerServices.ServiceGoogleImages
         pickerController.allowsEditing = false
@@ -110,7 +111,6 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
     }
     
     func presentImagePickerWithSourceType(sourceType: UIImagePickerControllerSourceType) {
-        
         let picker = UIImagePickerController()
         picker.sourceType = sourceType
         picker.allowsEditing = true
@@ -121,9 +121,12 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
     }
     
     func updateImageWithPayload(payload:[NSObject : AnyObject]) {
-        let image = payload[UIImagePickerControllerOriginalImage] as? UIImage
+        var image = payload[UIImagePickerControllerEditedImage] as? UIImage
+        if image == nil {
+            image = payload[UIImagePickerControllerOriginalImage] as? UIImage
+        }
         imageView.image = image
-        blurredView.hidden = true
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
         
         uploadImageToAWS(image!)
     }
@@ -136,7 +139,6 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
         updateImageWithPayload(info)
         dismissPickerController(picker)
     }
-    
     
     // MARK - UIImagePickerControllerDelegate methods
     
@@ -159,7 +161,6 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
     }
     
     func uploadImageToAWS(image: UIImage) {
-        
         let filePath = NSTemporaryDirectory().stringByAppendingPathComponent("temp")
         let imageData = UIImagePNGRepresentation(image)
         imageData.writeToFile(filePath, atomically: true)
@@ -173,7 +174,6 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
         self.uploadFileURLs.append(nil)
         
         self.upload(uploadRequest)
-        
     }
     
     func upload(uploadRequest: AWSS3TransferManagerUploadRequest) {
@@ -229,6 +229,13 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
             }
         }
         return nil
+    }
+    
+    // MARK: - Text Field delegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     // MARK: - Navigation
