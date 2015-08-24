@@ -14,7 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        UISegmentedControl.appearance().tintColor = UIColor(red: 219/255, green: 0/255, blue: 18/255, alpha: 1)
         
+        B2WAccountManager.sharedManager().brandName = "americanas.com"
+        B2WAccountManager.sharedManager().appPrimaryColor = UIColor(red: 219/255, green: 0/255, blue: 18/255, alpha: 1)
         
         B2WAPIClient.setBaseURLString(kBaseURLApi, brandCode: kBrandCode, apiKey: kAPIKey)
         

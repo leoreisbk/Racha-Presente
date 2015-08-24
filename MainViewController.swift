@@ -69,7 +69,7 @@ class MainViewController: UIViewController, SwipeViewDataSource, SwipeViewDelega
         //02-94311023-1 Igor
         //02-91114645-1 Android
         
-        let urlString = String(format:"https://still-fortress-6278.herokuapp.com/campaigns/%@.json","02-91114645-1")
+        let urlString = String(format:"https://still-fortress-6278.herokuapp.com/campaigns/%@.json","02-44336934-0")
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.GET(urlString, parameters: nil, success: { (request, JSON) -> Void in

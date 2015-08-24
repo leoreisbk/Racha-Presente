@@ -49,7 +49,6 @@ class VoucherViewController: UIViewController {
     UIPasteboard.generalPasteboard().string = campaign.voucherID
     }
     
-    
     @IBAction func openACOM(){
       UIApplication.sharedApplication().openURL(NSURL(string: "americanas://americanas.com.br/")!)
     }

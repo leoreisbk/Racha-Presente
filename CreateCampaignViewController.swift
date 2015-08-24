@@ -8,14 +8,28 @@
 
 import UIKit
 
-class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
-    @IBOutlet var campaignTitle: UITextField!{
-        didSet{
-            campaignTitle.delegate = self
+extension cameraView {
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
         }
     }
-    @IBOutlet var campaignDescription: UITextView!
+}
+
+@IBDesignable
+class cameraView: UIView {}
+
+
+class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+    
+    var campaignTitle: UITextField!
+    var campaignDescription: UITextField!
+    
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var segmentedControl: UISegmentedControl!{
         didSet{
@@ -24,15 +38,16 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
         }
     }
     
+    @IBOutlet var cameraView: UIView!
     var campaignExpiration = 5
     var imageName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString(".png")
     var uploadRequests = Array<AWSS3TransferManagerUploadRequest?>()
     var uploadFileURLs = Array<NSURL?>()
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     @IBAction func dismiss() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -46,19 +61,50 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
         actionSheet.showInView(self.view)
     }
     
+    // MARK - UITableViewDelegate methods
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
+        var cell: UITableViewCell!
+        
+        if (indexPath.row == 0) {
+            cell = tableView.dequeueReusableCellWithIdentifier("titleCell", forIndexPath: indexPath) as! UITableViewCell
+            campaignTitle = cell.viewWithTag(222) as! UITextField
+            campaignTitle.delegate = self
+            
+            
+        }else {
+            cell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath) as! UITableViewCell
+            campaignDescription = cell.viewWithTag(223) as! UITextField
+            campaignDescription.delegate = self
+        }
+        
+        return cell;
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 44
+    }
+    
     // MARK - UIActionSheetDelegate methods
     
     func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int) {
         switch actionSheet.buttonTitleAtIndex(buttonIndex) {
+        
+        case "Take Photo":
+            presentImagePickerWithSourceType(UIImagePickerControllerSourceType.Camera)
             
         case "Choose Photo":
             presentImagePickerWithSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
             break
         case "Search Photo":
-             photoSearch()
+            photoSearch()
             break
         default:
-             presentImagePickerWithSourceType(UIImagePickerControllerSourceType.Camera)
             break
         }
     }
@@ -68,7 +114,6 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
     }
     
     func postCampaign(){
-        
         let params = ["title":campaignTitle.text,
             "description":campaignDescription.text,
             "duration": campaignExpiration,
@@ -116,7 +161,7 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
         picker.allowsEditing = true
         picker.delegate = self
         picker.cropMode = DZNPhotoEditorViewControllerCropMode.Square
-
+        
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
@@ -128,6 +173,7 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
         imageView.image = image
         imageView.contentMode = UIViewContentMode.ScaleAspectFit
         
+        cameraView.hidden = true
         uploadImageToAWS(image!)
     }
     
@@ -212,9 +258,6 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
                     if let index = self.indexOfUploadRequest(self.uploadRequests, uploadRequest: uploadRequest) {
                         self.uploadRequests[index] = nil
                         self.uploadFileURLs[index] = uploadRequest.body
-                        
-                        let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                     }
                 })
             }

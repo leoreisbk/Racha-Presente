@@ -22,7 +22,7 @@ class CampaignViewController: UITableViewController {
     }
     @IBOutlet var duration: UILabel!{
         didSet{
-            duration.text = "\(campaign.duration)"
+            duration.text = String(format: "%d dias restantes", campaign.duration)
         }
     }
     @IBOutlet var imageView: UIImageView!{
