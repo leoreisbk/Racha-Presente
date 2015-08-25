@@ -75,8 +75,6 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
             cell = tableView.dequeueReusableCellWithIdentifier("titleCell", forIndexPath: indexPath) as! UITableViewCell
             campaignTitle = cell.viewWithTag(222) as! UITextField
             campaignTitle.delegate = self
-            
-            
         }else {
             cell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath) as! UITableViewCell
             campaignDescription = cell.viewWithTag(223) as! UITextField
@@ -160,7 +158,6 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
         picker.sourceType = sourceType
         picker.allowsEditing = true
         picker.delegate = self
-        picker.cropMode = DZNPhotoEditorViewControllerCropMode.Square
         
         self.presentViewController(picker, animated: true, completion: nil)
     }
@@ -171,7 +168,9 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
             image = payload[UIImagePickerControllerOriginalImage] as? UIImage
         }
         imageView.image = image
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.contentMode = UIViewContentMode.ScaleToFill
+        
+        let orientedImage = UIImage(CGImage: image!.CGImage, scale: 1, orientation: image!.imageOrientation)!
         
         cameraView.hidden = true
         uploadImageToAWS(image!)
@@ -193,6 +192,7 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func indexChanged(sender : UISegmentedControl) {

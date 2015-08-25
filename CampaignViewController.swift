@@ -28,14 +28,14 @@ class CampaignViewController: UITableViewController {
     @IBOutlet var imageView: UIImageView!{
         didSet{
             imageView.setImageWithURL(NSURL(string: campaign.imageURL))
-            imageView.contentMode = UIViewContentMode.ScaleAspectFit
+            imageView.contentMode = UIViewContentMode.ScaleToFill
         }
     }
     
     @IBOutlet var totalContribution: UILabel!{
         didSet{
             var quantity = campaign.contributions.count
-            totalContribution.text = quantity > 0 ? String(format:"%d contribuição(s)", quantity) : "Não há contribuição ainda"
+            totalContribution.text = quantity > 0 ? String(format:"%d contribuições", quantity) : "Não há contribuição ainda"
         }
     }
     var campaign: Campaign!
