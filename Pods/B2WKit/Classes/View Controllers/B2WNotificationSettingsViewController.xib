@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="B2WNotificationSettingsViewController">
+            <connections>
+                <outlet property="headerViewHeightConstraint" destination="nup-La-E7x" id="QeZ-v0-YKK"/>
+                <outlet property="headerViewTopConstraint" destination="Pjx-Z5-HD6" id="Twt-9a-XeA"/>
+                <outlet property="helpTextLabel" destination="vdC-PF-2y7" id="vnD-Ko-YU0"/>
+                <outlet property="tableView" destination="UhF-gu-5nB" id="fe3-T2-gq8"/>
+                <outlet property="view" destination="LLD-hf-qoa" id="Cqr-Wa-YmY"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="LLD-hf-qoa">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Vg-8L-LFc">
+                    <rect key="frame" x="0.0" y="64" width="320" height="66"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="b2w-icn-alertpush.png" translatesAutoresizingMaskIntoConstraints="NO" id="to8-nU-qTy">
+                            <rect key="frame" x="10" y="17" width="44" height="32"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="PEr-9t-coz"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lembrete: Habilite as notificações em Ajustes > Notificações e ligue-as para o app" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="251" translatesAutoresizingMaskIntoConstraints="NO" id="vdC-PF-2y7">
+                            <rect key="frame" x="64" y="0.0" width="251" height="66"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LZ9-Aa-JHY">
+                            <rect key="frame" x="0.0" y="65" width="320" height="2"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.78000000000000003" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="5UH-G8-AC5"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="vdC-PF-2y7" firstAttribute="leading" secondItem="to8-nU-qTy" secondAttribute="trailing" constant="10" id="5ks-iI-7Yd"/>
+                        <constraint firstAttribute="bottom" secondItem="vdC-PF-2y7" secondAttribute="bottom" id="Kcv-KH-Tuk"/>
+                        <constraint firstItem="vdC-PF-2y7" firstAttribute="top" secondItem="6Vg-8L-LFc" secondAttribute="top" id="UGm-1y-rDO"/>
+                        <constraint firstAttribute="centerY" secondItem="to8-nU-qTy" secondAttribute="centerY" id="bqo-J3-AEJ"/>
+                        <constraint firstAttribute="height" constant="66" id="nup-La-E7x"/>
+                        <constraint firstAttribute="trailing" secondItem="LZ9-Aa-JHY" secondAttribute="trailing" id="pl8-3A-GIC"/>
+                        <constraint firstAttribute="trailing" secondItem="vdC-PF-2y7" secondAttribute="trailing" constant="5" id="qcr-qS-xvw"/>
+                        <constraint firstAttribute="bottom" secondItem="LZ9-Aa-JHY" secondAttribute="bottom" id="raP-Ky-NMH"/>
+                        <constraint firstItem="LZ9-Aa-JHY" firstAttribute="leading" secondItem="6Vg-8L-LFc" secondAttribute="leading" id="rgG-oO-1kA"/>
+                        <constraint firstItem="to8-nU-qTy" firstAttribute="leading" secondItem="6Vg-8L-LFc" secondAttribute="leading" constant="10" id="rmH-d2-WdC"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="UhF-gu-5nB">
+                    <rect key="frame" x="0.0" y="130" width="320" height="438"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <label key="tableFooterView" hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fD2-nO-Iz2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="k1Y-f1-i5R"/>
+                        <outlet property="delegate" destination="-1" id="WRE-VO-NgG"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="UhF-gu-5nB" secondAttribute="trailing" id="KaC-2R-Qg1"/>
+                <constraint firstItem="6Vg-8L-LFc" firstAttribute="top" secondItem="LLD-hf-qoa" secondAttribute="top" constant="64" id="Pjx-Z5-HD6"/>
+                <constraint firstAttribute="trailing" secondItem="6Vg-8L-LFc" secondAttribute="trailing" id="Qb0-Yh-hKZ"/>
+                <constraint firstItem="UhF-gu-5nB" firstAttribute="top" secondItem="6Vg-8L-LFc" secondAttribute="bottom" id="VhG-Nw-ifA"/>
+                <constraint firstItem="6Vg-8L-LFc" firstAttribute="leading" secondItem="LLD-hf-qoa" secondAttribute="leading" id="XL8-lS-zuL"/>
+                <constraint firstItem="UhF-gu-5nB" firstAttribute="leading" secondItem="LLD-hf-qoa" secondAttribute="leading" id="eng-gX-0b3"/>
+                <constraint firstAttribute="bottom" secondItem="UhF-gu-5nB" secondAttribute="bottom" id="fec-nc-kxF"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="b2w-icn-alertpush.png" width="36" height="32"/>
+    </resources>
+</document>

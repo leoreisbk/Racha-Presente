@@ -1,0 +1,1 @@
+../../../BCScanner/BCScanner/UIViewController+BCScanner.h

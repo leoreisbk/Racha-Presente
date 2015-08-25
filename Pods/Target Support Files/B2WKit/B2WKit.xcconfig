@@ -1,0 +1,2 @@
+B_WKIT_FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/B2WKit/Classes/Frameworks"
+B_WKIT_OTHER_LDFLAGS = -framework "BVSDK"

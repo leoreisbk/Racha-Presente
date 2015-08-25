@@ -1,0 +1,1 @@
+../../../B2WKit/Classes/Networking/Parsers/B2WCatalogParser.h

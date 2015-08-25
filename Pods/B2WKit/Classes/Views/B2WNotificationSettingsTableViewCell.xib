@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="I6d-ZJ-uk7" customClass="B2WNotificationSettingsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I6d-ZJ-uk7" id="3ad-gp-rkq">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37E-LF-06A">
+                        <rect key="frame" x="20" y="11" width="32" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Gv4-Vl-zZf"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aJI-OU-RKl">
+                        <rect key="frame" x="251" y="6" width="51" height="31"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </switch>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Dw2-ct-FqY">
+                        <rect key="frame" x="266" y="12" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </activityIndicatorView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="aJI-OU-RKl" firstAttribute="centerX" secondItem="Dw2-ct-FqY" secondAttribute="centerX" id="V4V-Kr-9GE"/>
+                    <constraint firstAttribute="trailing" secondItem="aJI-OU-RKl" secondAttribute="trailing" constant="20" id="aNu-TW-YiV"/>
+                    <constraint firstAttribute="centerY" secondItem="37E-LF-06A" secondAttribute="centerY" id="cLK-NM-3K4"/>
+                    <constraint firstAttribute="centerY" secondItem="aJI-OU-RKl" secondAttribute="centerY" id="iMm-yF-5OH"/>
+                    <constraint firstItem="37E-LF-06A" firstAttribute="leading" secondItem="3ad-gp-rkq" secondAttribute="leading" constant="20" id="rec-ce-guF"/>
+                    <constraint firstItem="aJI-OU-RKl" firstAttribute="centerY" secondItem="Dw2-ct-FqY" secondAttribute="centerY" id="rnq-9U-j6P"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="activityIndicator" destination="Dw2-ct-FqY" id="1NC-B5-Bq9"/>
+                <outlet property="switchView" destination="aJI-OU-RKl" id="RB3-7Q-wwa"/>
+                <outlet property="titleLabel" destination="37E-LF-06A" id="ptU-ww-2Nh"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

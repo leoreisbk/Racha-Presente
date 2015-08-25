@@ -1,0 +1,27 @@
+{
+  "name": "IDMViewControllerStates",
+  "version": "0.0.1",
+  "homepage": "https://github.com/ideaismobile/IDMViewControllerStates",
+  "summary": "IDMViewControllerStates.",
+  "license": "MIT",
+  "authors": {
+    "thiagoperes": "thiago@appkraft.net"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "https://github.com/ideaismobile/IDMViewControllerStates.git",
+    "tag": "0.0.1"
+  },
+  "source_files": [
+    "Classes",
+    "Classes/**/*.{h,m}"
+  ],
+  "resources": [
+    "Classes/**/*.{xib}",
+    "IDMViewControllerStates.bundle"
+  ],
+  "exclude_files": "Classes/Exclude",
+  "requires_arc": true
+}

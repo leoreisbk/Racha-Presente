@@ -1,0 +1,1 @@
+../../../BCScanner/BCScanner/BCScannerViewController.h

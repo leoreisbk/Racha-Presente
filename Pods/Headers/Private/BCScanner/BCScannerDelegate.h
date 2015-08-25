@@ -1,0 +1,1 @@
+../../../BCScanner/BCScanner/Private/BCScannerDelegate.h

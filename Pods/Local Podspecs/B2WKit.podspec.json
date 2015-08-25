@@ -1,0 +1,76 @@
+{
+  "name": "B2WKit",
+  "version": "0.1",
+  "summary": "B2WKit",
+  "homepage": "http://stash.b2w/projects/MOB/repos/b2wswift-ios/browse",
+  "authors": {
+    "ideaismobile": "mobile@ideais.com.br"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "git": "https://github.com/ideaismobile/B2WKit.git",
+    "tag": "0.1"
+  },
+  "resource_bundles": {
+    "B2WKit": [
+      "Resources/*",
+      "Classes/**/*.{xib}",
+      "Classes/**/*.{storyboard}"
+    ]
+  },
+  "source_files": [
+    "Classes",
+    "Classes/**/*.{h,m}"
+  ],
+  "exclude_files": "Classes/External/NSString+GTMNSStringHTMLAddtions.m",
+  "prefix_header_contents": "#import \"B2WKit-Constants.h\"",
+  "requires_arc": true,
+  "dependencies": {
+    "AFNetworking": [
+      "~> 2.5.4"
+    ],
+    "Mantle": [
+      "~> 1.4.1"
+    ],
+    "SFHFKeychainUtils": [
+      "~> 0.0.1"
+    ],
+    "SVProgressHUD": [
+      "~> 1.0"
+    ],
+    "NSAttributedStringMarkdownParser": [
+      "~> 0.0.1"
+    ],
+    "UICKeyChainStore": [
+      "~> 1.0.5"
+    ],
+    "IDMAlertViewManager": [
+      "~> 1.1"
+    ],
+    "JVFloatLabeledTextField": [
+      "~> 0.0.8"
+    ],
+    "BSKeyboardControls": [
+      "~> 2.2"
+    ],
+    "MZFormSheetController": [
+      "~> 2.2"
+    ],
+    "PBWebViewController": [
+      "~> 0.3"
+    ],
+    "CrittercismSDK": [
+
+    ]
+  },
+  "vendored_frameworks": "Classes/Frameworks/BVSDK.framework",
+  "subspecs": [
+    {
+      "name": "no-arc",
+      "requires_arc": false,
+      "source_files": "Classes/External/NSString+GTMNSStringHTMLAddtions.m"
+    }
+  ]
+}
