@@ -28,7 +28,8 @@ class CampaignViewController: UITableViewController {
     @IBOutlet var imageView: UIImageView!{
         didSet{
             imageView.setImageWithURL(NSURL(string: campaign.imageURL))
-            imageView.contentMode = UIViewContentMode.ScaleToFill
+            imageView.contentMode = UIViewContentMode.ScaleAspectFill
+            imageView.clipsToBounds = true
         }
     }
     

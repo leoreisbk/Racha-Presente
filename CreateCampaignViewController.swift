@@ -112,6 +112,9 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
     }
     
     func postCampaign(){
+        
+        SVProgressHUD.showWithStatus("Publicando...", maskType: SVProgressHUDMaskType.Black)
+        
         let params = ["title":campaignTitle.text,
             "description":campaignDescription.text,
             "duration": campaignExpiration,
@@ -122,7 +125,7 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.POST("https://still-fortress-6278.herokuapp.com/campaigns.json", parameters: params, success: { (request, JSON) -> Void in
-            
+            SVProgressHUD.dismiss()
             let dict = JSON as! NSDictionary
             let campaign = Campaign(campaignDict: dict)
             self.performSegueWithIdentifier("showCampaign", sender: campaign)
