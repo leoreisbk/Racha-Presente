@@ -43,8 +43,15 @@ class CampaignViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      self.tableView.addPullToRefreshWithActionHandler { () -> Void in
+      self.refreshCampaign(self.campaign.customerID)
+      }
     }
-    
+  
+  
+  override func viewDidAppear(animated: Bool) {
+    self.tableView.triggerPullToRefresh()
+  }
     func numberFormatter(amount: CGFloat) -> String {
         let formatter = NSNumberFormatter()
         formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
@@ -115,6 +122,24 @@ class CampaignViewController: UITableViewController {
         
         presentViewController(activityVC, animated: true, completion: nil)
     }
+  func refreshCampaign(customerID: String){
+     SVProgressHUD.showWithStatus("Reloading...", maskType: SVProgressHUDMaskType.Black)
+    let urlString = String(format:"https://still-fortress-6278.herokuapp.com/campaigns/%@.json",customerID)
+    let manager = AFHTTPRequestOperationManager()
+    manager.requestSerializer = AFJSONRequestSerializer()
+    manager.GET(urlString, parameters: nil, success: { (request, JSON) -> Void in
+      SVProgressHUD.dismiss()
+      let dict = JSON as! NSDictionary
+      if let customer: String = dict["b2w_customer_id"] as? String {
+        self.campaign = Campaign(campain:Campaign(campaignDict: dict))
+        self.tableView.reloadData()
+      }
+      }) { (request, error) -> Void in
+        if request.response.statusCode == 500 {
+        }
+    }
+  }
+  
     func requestVoucher() {
         let params = ["completed":true]
         let url = String(format: "https://still-fortress-6278.herokuapp.com/campaigns/%@.json",campaign.customerID)

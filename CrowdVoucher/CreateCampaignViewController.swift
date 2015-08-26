@@ -173,8 +173,6 @@ class CreateCampaignViewController: UITableViewController, UIActionSheetDelegate
         imageView.image = image
         imageView.contentMode = UIViewContentMode.ScaleToFill
         
-        let orientedImage = UIImage(CGImage: image!.CGImage, scale: 1, orientation: image!.imageOrientation)!
-        
         cameraView.hidden = true
         uploadImageToAWS(image!)
     }

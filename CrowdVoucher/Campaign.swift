@@ -36,4 +36,20 @@ class Campaign: NSObject {
         updateDate           = campaignDict["updated_at"] as! String
         voucherID            = campaignDict["voucher_id"] as! String
     }
+  
+  init(campain: Campaign){
+    customerID           = campain.customerID
+    completed            = campain.completed
+    contributions        = campain.contributions
+    createdDate          = campain.createdDate
+    campaignDesciption   = campain.campaignDesciption
+    duration             = campain.duration
+    endDate              = campain.endDate
+    imageURL             = campain.imageURL
+    title                = campain.title
+    totalAmount          = campain.totalAmount
+    updateDate           = campain.updateDate
+    voucherID            = campain.voucherID
+    
+  }
 }

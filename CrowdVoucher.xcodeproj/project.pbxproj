@@ -41,7 +41,7 @@
 		30F5B9D63AD6500ADB1E2ED7 /* Pods-CrowdVoucher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrowdVoucher.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CrowdVoucher/Pods-CrowdVoucher.debug.xcconfig"; sourceTree = "<group>"; };
 		524CA07DC8AB393E162F6B6E /* libPods-CrowdVoucher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CrowdVoucher.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A71AF5DE1B7F71920050E41B /* ic-voucher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic-voucher.png"; sourceTree = "<group>"; };
-		A723EBA71B7E6EDF0016B8C4 /* CrowdVoucher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrowdVoucher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A723EBA71B7E6EDF0016B8C4 /* Racha-Presente.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Racha-Presente.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A723EBAB1B7E6EDF0016B8C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A723EBAC1B7E6EDF0016B8C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A723EBB11B7E6EDF0016B8C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		A723EBA81B7E6EDF0016B8C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A723EBA71B7E6EDF0016B8C4 /* CrowdVoucher.app */,
+				A723EBA71B7E6EDF0016B8C4 /* Racha-Presente.app */,
 				A723EBBC1B7E6EDF0016B8C4 /* CrowdVoucherTests.xctest */,
 			);
 			name = Products;
@@ -240,7 +240,7 @@
 			);
 			name = CrowdVoucher;
 			productName = CrowdVoucher;
-			productReference = A723EBA71B7E6EDF0016B8C4 /* CrowdVoucher.app */;
+			productReference = A723EBA71B7E6EDF0016B8C4 /* Racha-Presente.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A723EBBB1B7E6EDF0016B8C4 /* CrowdVoucherTests */ = {
@@ -497,7 +497,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CrowdVoucher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = CrowdVoucher;
+				PRODUCT_NAME = "Racha-Presente";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/CrowdVoucher/header.h";
 			};
@@ -513,7 +513,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CrowdVoucher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = CrowdVoucher;
+				PRODUCT_NAME = "Racha-Presente";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/CrowdVoucher/header.h";
 			};
